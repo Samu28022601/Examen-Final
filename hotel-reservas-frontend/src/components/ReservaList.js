@@ -1,33 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
 
-const ReservaList = () => {
-  const [reservas, setReservas] = useState([]);
-
-  useEffect(() => {
-    const fetchReservas = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/reservas");
-        const data = await response.json();
-        setReservas(data);
-      } catch (error) {
-        console.error("Error al obtener las reservas:", error);
-      }
-    };
-
-    fetchReservas();
-  }, []);
-
+const ReservaList = ({ reservas }) => {
   return (
-    <div>
-      <h2>Lista de Reservas</h2>
-      <ul>
-        {reservas.map((reserva) => (
-          <li key={reserva.id}>
-            {reserva.nombreCliente} - {reserva.fechaInicio} a {reserva.fechaFin} ({reserva.tipoHabitacion})
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {reservas.map((reserva, index) => (
+        <li key={index}>
+          {reserva.nombre} - {reserva.fechaInicio} al {reserva.fechaFin} - {reserva.tipoHabitacion}
+        </li>
+      ))}
+    </ul>
   );
 };
 

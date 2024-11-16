@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReservaForm from './components/ReservaForm';
 import ReservaList from './components/ReservaList';
 import Home from './components/Home';
 import './App.css';
 
 function App() {
+  const [reservas, setReservas] = useState([]);
+
+  const addReserva = (nuevaReserva) => {
+    setReservas([...reservas, nuevaReserva]);
+  };
+
   return (
     <div className="app-container">
       <header className="app-header">
@@ -12,10 +18,10 @@ function App() {
       </header>
       <main className="main-content">
         <section className="form-section">
-          <ReservaForm />
+          <ReservaForm onAddReserva={addReserva} />
         </section>
         <section className="list-section">
-          <ReservaList />
+          <ReservaList reservas={reservas} />
         </section>
       </main>
       <footer className="app-footer">
